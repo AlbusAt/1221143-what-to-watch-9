@@ -10,6 +10,8 @@ const Setting = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App title={Setting.TITLE} genre={Setting.GENRE} year={Setting.YEAR} />
+    <App
+      title={Setting.TITLE} genre={Setting.GENRE} year={Setting.YEAR}
+    />
   </React.StrictMode>,
   document.getElementById('root'));
