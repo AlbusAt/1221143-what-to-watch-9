@@ -4,7 +4,8 @@ import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
 import MyList from '../my-list/my-list';
 import FilmPage from '../film-page/film-page';
-//import PageReview from '../add-review/add-review';
+import PageReview from '../add-review/add-review';
+import Player from '../player/player';
 
 type AppScreenProps = {
   title: string,
@@ -31,6 +32,14 @@ function App({genre,title,year}: AppScreenProps): JSX.Element {
         <Route
           path = {AppRoute.Film}
           element = {<FilmPage/>}
+        />
+        <Route
+          path = {AppRoute.Review}
+          element = {<PageReview/>}
+        />
+        <Route
+          path = {AppRoute.Player}
+          element = {<Player/>}
         />
       </Routes>
     </BrowserRouter>
