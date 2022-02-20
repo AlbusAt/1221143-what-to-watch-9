@@ -3,6 +3,7 @@ import {AppRoute} from '../../const';
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
 import MyList from '../my-list/my-list';
+import FilmPage from '../film-page/film-page';
 //import PageReview from '../add-review/add-review';
 
 type AppScreenProps = {
@@ -26,6 +27,10 @@ function App({genre,title,year}: AppScreenProps): JSX.Element {
         <Route
           path = {AppRoute.MyList}
           element = {<MyList/>}
+        />
+        <Route
+          path = {AppRoute.Film}
+          element = {<FilmPage/>}
         />
       </Routes>
     </BrowserRouter>
