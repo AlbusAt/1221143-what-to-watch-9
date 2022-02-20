@@ -2,6 +2,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
+import MyList from '../my-list/my-list';
 //import PageReview from '../add-review/add-review';
 
 type AppScreenProps = {
@@ -21,6 +22,10 @@ function App({genre,title,year}: AppScreenProps): JSX.Element {
         <Route
           path = {AppRoute.Login}
           element = {<SignIn />}
+        />
+        <Route
+          path = {AppRoute.MyList}
+          element = {<MyList/>}
         />
       </Routes>
     </BrowserRouter>
