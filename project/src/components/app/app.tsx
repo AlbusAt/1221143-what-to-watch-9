@@ -7,6 +7,7 @@ import FilmPage from '../film-page/film-page';
 import PageReview from '../add-review/add-review';
 import Player from '../player/player';
 import PrivateRoute from '../private-route/private-route';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type AppScreenProps = {
   title: string,
@@ -45,6 +46,10 @@ function App({genre,title,year}: AppScreenProps): JSX.Element {
               <MyList/>
             </PrivateRoute>
           }
+        />
+        <Route
+          path="*"
+          element={<NotFoundScreen />}
         />
       </Routes>
     </BrowserRouter>
