@@ -1,11 +1,12 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
 import MyList from '../my-list/my-list';
 import FilmPage from '../film-page/film-page';
 import PageReview from '../add-review/add-review';
 import Player from '../player/player';
+import PrivateRoute from '../private-route/private-route';
 
 type AppScreenProps = {
   title: string,
@@ -26,10 +27,6 @@ function App({genre,title,year}: AppScreenProps): JSX.Element {
           element = {<SignIn />}
         />
         <Route
-          path = {AppRoute.MyList}
-          element = {<MyList/>}
-        />
-        <Route
           path = {AppRoute.Film}
           element = {<FilmPage/>}
         />
@@ -40,6 +37,14 @@ function App({genre,title,year}: AppScreenProps): JSX.Element {
         <Route
           path = {AppRoute.Player}
           element = {<Player/>}
+        />
+        <Route
+          path = {AppRoute.MyList}
+          element = {
+            <PrivateRoute authorizationStatus = {AuthorizationStatus.NoAuth}>
+              <MyList/>
+            </PrivateRoute>
+          }
         />
       </Routes>
     </BrowserRouter>
