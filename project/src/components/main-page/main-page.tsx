@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import FilmsCard from '../film-card/film-card';
+import MyList from '../my-list/my-list';
 
 type MainPageProps = {
   genre: string,
@@ -58,12 +59,7 @@ function MainPage({title, genre, year}: MainPageProps): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"/>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <MyList/>
               </div>
             </div>
           </div>
