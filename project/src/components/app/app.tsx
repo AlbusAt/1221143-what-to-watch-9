@@ -1,55 +1,59 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { useState } from 'react';
+import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import MainPage from '../main-page/main-page';
-import SignIn from '../sign-in/sign-in';
-import MyList from '../my-list/my-list';
-import FilmPage from '../film-page/film-page';
-import PageReview from '../add-review/add-review';
+import { Film } from '../../types/film-type';
+import AddCard from '../add-card/add-card';
+import MainCard from '../main-card/main-card';
+import MoviePages from '../movie-pages/movie-pages';
+import MyListPage from '../my-list/my-list';
+import NotFoundPage from '../not-found-screen/not-found-screen';
 import Player from '../player/player';
 import PrivateRoute from '../private-route/private-route';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
+import SignIn from '../sign-in/sign-in';
 
 type AppScreenProps = {
-  title: string,
-  genre: string,
-  year: number;
-};
+  promoFilm: Film;
+  films: Film[];
+}
 
-function App({genre,title,year}: AppScreenProps): JSX.Element {
+function App({promoFilm, films}: AppScreenProps): JSX.Element {
+
+  const [currentFilm, setCurrentFilm] = useState<Film | null>(null);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path = {AppRoute.Main}
-          element = {<MainPage title={title} genre={genre} year={year} />}
+          path={AppRoute.Main}
+          element={<MainCard {...{ setCurrentFilm, promoFilm, films }} />}
         />
         <Route
-          path = {AppRoute.Login}
-          element = {<SignIn />}
+          path={AppRoute.SignIn}
+          element={<SignIn/>}
         />
         <Route
-          path = {AppRoute.Film}
-          element = {<FilmPage/>}
+          path={AppRoute.Film}
+          element={<MoviePages setCurrentFilm = {setCurrentFilm} film={currentFilm} similarFilms={films}/>}
         />
         <Route
-          path = {AppRoute.Review}
-          element = {<PageReview/>}
+          path={AppRoute.Player}
+          element={<Player/>}
         />
         <Route
-          path = {AppRoute.Player}
-          element = {<Player/>}
-        />
-        <Route
-          path = {AppRoute.MyList}
-          element = {
-            <PrivateRoute authorizationStatus = {AuthorizationStatus.NoAuth}>
-              <MyList/>
+          path={AppRoute.MyList}
+          element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <MyListPage {...{ setCurrentFilm, films }}/>
             </PrivateRoute>
           }
         />
         <Route
+          path={AppRoute.AddReview}
+          element={<AddCard film={currentFilm}/>}
+        />
+        <Route
           path="*"
-          element={<NotFoundScreen />}
+          element={<NotFoundPage/>}
         />
       </Routes>
     </BrowserRouter>
