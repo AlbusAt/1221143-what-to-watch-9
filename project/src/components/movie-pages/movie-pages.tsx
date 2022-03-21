@@ -24,7 +24,7 @@ function MoviePages({ film, similarFilms, setCurrentFilm }: MovieProps): JSX.Ele
 
           <header className="page-header film-card__head">
             <div className="logo">
-              <Link to="main.html" className="logo__link">
+              <Link to="/" className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
@@ -117,7 +117,11 @@ function MoviePages({ film, similarFilms, setCurrentFilm }: MovieProps): JSX.Ele
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
-            {similarFilms.map((similarFilm: Film) => <FilmCard setCurrentFilm = {setCurrentFilm} film={similarFilm} key={similarFilm.id} />)}
+            {similarFilms.map((similarFilm: Film) => (
+              <FilmCard onHover={function (cardId: number): void {
+                throw new Error('Function not implemented.');
+              } }  film={similarFilm} {...{ setCurrentFilm}} key={similarFilm.id}
+              />))}
           </div>
         </section>
         <PageFooter />

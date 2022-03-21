@@ -13,7 +13,7 @@ function MyListPage({films, setCurrentFilm}: MyListProps): JSX.Element {
     <div className="user-page">
       <header className="page-header user-page__head">
         <div className="logo">
-          <Link to="main.html" className="logo__link">
+          <Link to="/" className="logo__link">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
@@ -38,7 +38,11 @@ function MyListPage({films, setCurrentFilm}: MyListProps): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {films.map((film: Film) => <FilmCard {...{ setCurrentFilm, film}} key={film.id}/>)}
+          {films.map((film: Film) => (
+            <FilmCard onHover={function (cardId: number): void {
+              throw new Error('Function not implemented.');
+            } } {...{ setCurrentFilm, film }} key={film.id}
+            />))}
         </div>
       </section>
       <PageFooter />

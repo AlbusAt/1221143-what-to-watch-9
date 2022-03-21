@@ -6,12 +6,25 @@ import {Film} from '../../types/film-type';
 
 type MainCardProps = {
   promoFilm: Film;
-  films: Film[];
-  setCurrentFilm:React.Dispatch<React.SetStateAction<Film | null>>
+  setCurrentFilm:React.Dispatch<React.SetStateAction<Film | null>>;
+  setFilmsState: React.Dispatch<React.SetStateAction<Film[] | null>>;
+  filmsState: Film[]  | null;
 }
 
-function MainCard({promoFilm, films, setCurrentFilm}: MainCardProps): JSX.Element {
+function MainCard({promoFilm, setCurrentFilm, setFilmsState, filmsState}: MainCardProps): JSX.Element {
 
+  const onHoverHandler=(id:number, isMouseLeave:boolean) => {
+    setFilmsState((prev: Film[]|null) => {
+      if (prev) {
+        const newState= prev?.slice(0);
+        newState?.forEach((film)=> {
+          film.isActive = isMouseLeave ? false : film.id ===id;
+        });
+        return newState;
+      }
+      return prev;
+    });
+  };
 
   return (
     <>
@@ -53,7 +66,8 @@ function MainCard({promoFilm, films, setCurrentFilm}: MainCardProps): JSX.Elemen
           </ul>
 
           <div className="catalog__films-list">
-            {films.map((film: Film) => <FilmCard {...{ setCurrentFilm, film}} key={film.id}/>)}
+            {filmsState && filmsState.map((film: Film) => (
+              <FilmCard onHover={onHoverHandler} {...{ setCurrentFilm, film }} key={film.id}/>))}
           </div>
 
           <div className="catalog__more">

@@ -7,4 +7,7 @@ export type Film = {
   released: number,
   id: number,
   review: string;
+  videoLink: string,
+  previewVideoLink: string,
+  isActive?: boolean;
 }

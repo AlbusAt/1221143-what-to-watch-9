@@ -19,13 +19,14 @@ type AppScreenProps = {
 function App({promoFilm, films}: AppScreenProps): JSX.Element {
 
   const [currentFilm, setCurrentFilm] = useState<Film | null>(null);
+  const [filmsState,  setFilmsState] = useState<Film[]| null> (films);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainCard {...{ setCurrentFilm, promoFilm, films }} />}
+          element={<MainCard {...{ filmsState, setFilmsState, setCurrentFilm, promoFilm, films }} />}
         />
         <Route
           path={AppRoute.SignIn}
@@ -37,7 +38,7 @@ function App({promoFilm, films}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Player}
-          element={<Player/>}
+          element={<Player {...{films}} />}
         />
         <Route
           path={AppRoute.MyList}
